@@ -1,0 +1,80 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 20px;
+    padding: 0px;
+    height: 100vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #DDA827;
+    background-color: #281E18;
+}
+
+header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.left-header {
+    border-bottom: 2px solid #DDA827;
+}
+
+header > h2 {
+    margin: 20px 0px;
+}
+
+main {
+    display: flex;
+    flex: 1;
+}
+
+.left-container, .right-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; 
+    width: 50vw;
+    border: 2px dashed #DDA827;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    width: 25vw;
+}
+
+form > h4 {
+    margin: 0px;
+    border-bottom: 2px solid #DDA827;
+}
+
+input {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 2px;
+    background-color: #572D0C;
+    color: #DDA827;
+    border-color:#281E18;
+}
+
+button {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 2px;
+    width: 125px;
+    background-color: #572D0C;
+    color: #DDA827;
+    border-color:#281E18;
+}
+
+.database-entry {
+    background-color: #572D0C;
+    text-align: left;
+    margin-top: 25px;
+    padding: 4px;
+    border: 1px solid #DDA827;
+}
+
+.database-entry > p {
+    margin: 2px;
+    font-size: 14px;
+}
