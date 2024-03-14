@@ -31,31 +31,22 @@ app.get('/', (req, res) => {
 });
 
 // GET
-app.get("/students", async function(req, res, next) {
+app.get("/students", getAllStudents);
+
+async function getAllStudents(req, res) {
     Logger.getRequestReceived();
 
-    try {
-        const results = await getAllStudents();
-        
-        res.status(200).json(results);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-async function getAllStudents() {
     const queryText = 'SELECT * FROM students;';
 
     const client = createNewClient();
     try {
         await client.connect();
-        const res = await client.query(queryText);
+        const results = await client.query(queryText);
 
-        return res.rows;
+        res.status(200).json(results.rows);
     } catch (err) {
         console.error(err);
-        throw err;
+        res.status(500).json({ error: 'Internal Server Error' })
     } finally {
         client.end();
     }
@@ -63,6 +54,7 @@ async function getAllStudents() {
 
 // CREATE
 app.post("/students", addStudent);
+
 async function addStudent(req, res, next) {
     Logger.postRequestReceived();
 
@@ -79,7 +71,7 @@ async function addStudent(req, res, next) {
         results = await client.query(queryText, values)
     } catch (err) {
         console.error(err);
-        throw err;
+        res.status(500).json({ error: 'Internal Server Error' })
     } finally {
         res.status(200).json(results);
         client.end();
@@ -88,6 +80,7 @@ async function addStudent(req, res, next) {
 
 // PATCH
 app.patch("/students/:id", updateStudentEmail);
+
 async function updateStudentEmail(req, res) {
     Logger.postRequestReceived();
 
@@ -104,7 +97,7 @@ async function updateStudentEmail(req, res) {
         results = await client.query(queryText, values)
     } catch (err) {
         console.error(err);
-        throw err;
+        res.status(500).json({ error: 'Internal Server Error' })
     } finally {
         res.status(200).json(results);
         client.end();
@@ -113,13 +106,12 @@ async function updateStudentEmail(req, res) {
 
 // DELETE
 app.delete('/students/:id', deleteStudent);
+
 async function deleteStudent(req, res) {
     Logger.deleteRequestReceived();
 
     const queryText = 'DELETE FROM students WHERE student_id = $1;';
-    const values = req.body;
-
-    console.log(values)
+    const values = [req.params.id];
 
     let results;
 
@@ -129,7 +121,7 @@ async function deleteStudent(req, res) {
         results = await client.query(queryText, values)
     } catch (err) {
         console.error(err);
-        throw err;
+        res.status(500).json({ error: 'Internal Server Error' })
     } finally {
         res.status(200).json(results);
         client.end();
