@@ -6,7 +6,7 @@ function applyEventListeners() {
     const add_student_button = document.querySelector('.add-student-button');
     const update_student_button = document.querySelector('.update-student-button');
     const delete_student_button = document.querySelector('.delete-student-button');
-
+    
     get_students_button.addEventListener('click', (event) => {
         event.preventDefault();
         fetchStudents();

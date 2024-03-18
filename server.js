@@ -52,7 +52,7 @@ async function getAllStudents(req, res) {
     }
 }
 
-// CREATE
+// POST
 app.post("/students", addStudent);
 
 async function addStudent(req, res, next) {
@@ -60,8 +60,6 @@ async function addStudent(req, res, next) {
 
     const queryText = 'INSERT INTO students(first_name, last_name, email, enrollment_date) VALUES ($1, $2, $3, $4);';
     const values = req.body;
-
-    console.log(values);
 
     let results;
 
@@ -86,8 +84,6 @@ async function updateStudentEmail(req, res) {
 
     const queryText = 'UPDATE students SET email = $1 WHERE student_id = $2;'
     const values = req.body;
-
-    console.log(values)
 
     let results;
 
@@ -128,6 +124,7 @@ async function deleteStudent(req, res) {
     }
 }
 
+// logging class for debugging
 class Logger {
     static getRequestReceived() { console.log('GET request received'); }
     static postRequestReceived() { console.log('POST request received'); }
@@ -135,6 +132,7 @@ class Logger {
     static deleteRequestReceived() { console.log('DELETE request received'); }
 }
 
+// run server, listening on port 3000
 function main() {
     app.listen(3000);
 }

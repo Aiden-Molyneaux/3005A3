@@ -2,38 +2,25 @@ import { getStudents, postStudent, patchStudentEmail, deleteStudent } from "./ht
 import { updateDBPanelUI } from "./ui";
 import { getNewStudentAttrs, getUpdatedStudentAttrs, getDeletedStudentAttrs } from "./utils";
 
+// get all student data, then update the UI
 export function fetchStudents() {
-    getStudents((data) => {
-        updateDBPanelUI(data);
-    });
+    getStudents((data) => { updateDBPanelUI(data); });
 }
 
+// add new student, then get all student data, then update the UI
 export function addNewStudent() {
     const values = getNewStudentAttrs();
-
-    postStudent(...values, () => {
-        getStudents((data) => {
-            updateDBPanelUI(data);
-        });
-    });
+    postStudent(...values, () => { fetchStudents(); });
 }
 
+// update student email, then get all student data, then update the UI
 export function updateStudentEmail() {
     const values = getUpdatedStudentAttrs();
-
-    patchStudentEmail(...values, () => {
-        getStudents((data) => {
-            updateDBPanelUI(data);
-        });
-    });
+    patchStudentEmail(...values, () => { fetchStudents(); });
 }
 
+// delete student, then get all student data, then update the UI
 export function deleteStudentByID() {
     const values = getDeletedStudentAttrs();
-
-    deleteStudent(...values, () => {
-        getStudents((data) => {
-            updateDBPanelUI(data);
-        });
-    });
+    deleteStudent(...values, () => { fetchStudents(); });
 }

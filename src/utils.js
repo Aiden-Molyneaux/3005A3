@@ -1,3 +1,5 @@
+// methods for getting values from the CRUD Operation UI
+
 export function getNewStudentAttrs() {
     const first_name = document.querySelector('.first-name-input').value;
     const last_name = document.querySelector('.last-name-input').value;
